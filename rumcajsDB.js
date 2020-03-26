@@ -8,10 +8,10 @@
     function setUpDb(){
         return new Promise((resolve, reject) => {
             if(db){
-                resolve();
+                resolve(db);
                 return;
             }
-            let dbreq = indexedDB.open('rumcajsDb', 1);
+            let dbreq = indexedDB.open('rumcajsDb', 2);
             dbreq.onupgradeneeded = event =>{
                 db = event.target.result;
                 let userObjectStore = db.createObjectStore("user", { keyPath: "id", autoIncrement: true });
@@ -22,7 +22,7 @@
             }
             dbreq.onsuccess = event =>{
                 db = event.target.result;
-                resolve();
+                resolve(db);
             }
             dbreq.onerror = event =>{
                 reject("error connecting to rumcajsDb" + " DB details:\n" + event);
@@ -70,6 +70,24 @@
             tx.onerror = reject();
         });
     }
+    function updateNick(){
+        return new Promise((resolve, reject) =>{
+            let tx = db.transaction('user', 'readwrite');
+            let store = tx.objectStore('user');
+            let getReq = store.get(1);
+            getReq.onsuccess = event =>{
+                let friend = event.target.result;
+                friend.messagesList.push(message);
+                let updateReq = store.put(friend);
+                updateReq.onerror = error =>{
+                    console.error('error adding message' + error.target.errorCode);
+                }
+            }
+            tx.oncomplete = resolve();
+            tx.onerror = reject();
+        });
+    }
+
 
     //Query db
     function getUser(){
@@ -158,4 +176,11 @@
                 resolve(data);
             }
         });
+    }
+    module.exports = {
+        setUpDb,
+        addNewUser,
+        addNewFriend,
+        getUser,
+        getFriend
     }

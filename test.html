@@ -3,15 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <script src="classes.js" ></script>
-<script src="rumcajsDB.js" ></script>
+<!-- <script src="rumcajsDB.js" ></script> -->
 <title>Title of the document</title>
 </head>
 
 <script>
     let kuba = new User(123, "1.2.3", 321);
-    let ania = new Friend("Ania", 456, "4.5.6");
-    let message = new Message(kuba, ania, "ct");
-    ania.messagesList.push(message);
+
+    // let ania = new Friend("Ania", 456, "4.5.6");
+    // let message = new Message(kuba, ania, "ct");
+    // ania.messagesList.push(message);
     // let jan = new Friend("Jan", 789, "4.5.5");
     // let message = new Message(kuba, jan, "elo");
     // jan.messagesList.push(message);
@@ -19,19 +20,21 @@
     // message = new Message(kuba, mike, "fuck u");
     // mike.messagesList.push(message);
 
-    // (async ()=>{
-    //     await setUpDb();
-    //     await addNewFriend(ania);
-    //     console.log("gitówa")
-    // })();
-    // setUpDb().then(() => addMessage(ania, message));
-    (async ()=>{
-        await setUpDb();
-        // await addNewFriend(ania);
-        // await addNewUser(kuba);
-        let user = await getFriend(ania.publicKey);
-        console.log(user);
-    })();
+    // let user = new User(123, "1.2.3", 321);
+    // let friend = new Friend("Gosia", 456, "4.5.6");
+    // let message = new Message(user, friend, "ct");
+    // friend.messagesList.push(message);
+    // let dbFriend, dbUser;
+    // let prom = setUpDb().then(() => addNewUser(user)).
+    //             then(() => addNewFriend(friend)).
+    //             then(() => getUser()).
+    //             then(console.log).
+    //             then(() => getFriend(friend.publicKey)).
+    //             then((val) => console.log(val));
+    console.log(franek)
+    console.log(alek)
+
+    
 </script>
 
 

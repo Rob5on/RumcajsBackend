@@ -1,4 +1,3 @@
-
 class User
 {
     constructor(publicKey, ipAddress, privateKey, AlPort, nick){
@@ -9,6 +8,7 @@ class User
         this.nick = nick;
     }
 }
+
 class Friend
 {
     constructor(nick, publicKey, ipAddress){
@@ -29,4 +29,4 @@ class Message
         this.sender = sender;
     }
 }
-//module.exports = {User, Friend, Message}
+module.exports = {User, Friend, Message}
