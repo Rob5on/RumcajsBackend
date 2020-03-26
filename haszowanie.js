@@ -72,3 +72,10 @@ function convertArrayBufferViewtoString(buffer)
 
     return str;
 }
+module.exports = {
+    generateKeys,
+    encrypt_data,
+    decrypt_data,
+    convertStringToArrayBufferView,
+    convertArrayBufferViewtoString
+}
