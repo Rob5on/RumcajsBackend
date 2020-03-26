@@ -8,7 +8,7 @@
     function setUpDb(){
         return new Promise((resolve, reject) => {
             if(db){
-                resolve(db);
+                resolve();
                 return;
             }
             let dbreq = indexedDB.open('rumcajsDb', 2);
@@ -22,7 +22,7 @@
             }
             dbreq.onsuccess = event =>{
                 db = event.target.result;
-                resolve(db);
+                resolve();
             }
             dbreq.onerror = event =>{
                 reject("error connecting to rumcajsDb" + " DB details:\n" + event);
