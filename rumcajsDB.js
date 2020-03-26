@@ -117,54 +117,54 @@
     }
 
     //Quering user's info
-    // function getUserPublicKey(db, user){
-    //     return new Promise((resolve, reject) =>{
-    //         let tx = db.transaction("user", "readonly")
-    //         let store = tx.objectStore("user");
-    //         let getReq = store.get(1);
-    //         getReq.onsuccess = event =>{
-    //             let data = event.target.result.publicKey;
-    //             resolve(data);
-    //         }
-    //     });
-    // }
+    function getUserPublicKey(db, user){
+        return new Promise((resolve, reject) =>{
+            let tx = db.transaction("user", "readonly")
+            let store = tx.objectStore("user");
+            let getReq = store.get(1);
+            getReq.onsuccess = event =>{
+                let data = event.target.result.publicKey;
+                resolve(data);
+            }
+        });
+    }
     
-    // function getUserPrivateKey(db, user){
-    //     return new Promise((resolve, reject) =>{
-    //         let tx = db.transaction("user", "readonly")
-    //         let store = tx.objectStore("user");
-    //         let index = store.index('publicKey');
-    //         let getReq = index.get(user.publicKey);
-    //         getReq.onsuccess = event =>{
-    //             let data = event.target.result.privateKey;
-    //             resolve(data);
-    //         }
-    //     });
-    // }
+    function getUserPrivateKey(db, user){
+        return new Promise((resolve, reject) =>{
+            let tx = db.transaction("user", "readonly")
+            let store = tx.objectStore("user");
+            let index = store.index('publicKey');
+            let getReq = index.get(user.publicKey);
+            getReq.onsuccess = event =>{
+                let data = event.target.result.privateKey;
+                resolve(data);
+            }
+        });
+    }
     
-    // function getUserIpAddress(db, user){
-    //     return new Promise((resolve, reject) =>{
-    //         let tx = db.transaction("user", "readonly")
-    //         let store = tx.objectStore("user");
-    //         let getReq = store.get(user.publicKey);
-    //         getReq.onsuccess = event =>{
-    //             let data = event.target.result.ipAddress;
-    //             resolve(data);
-    //         }
-    //     });
-    // }
+    function getUserIpAddress(db, user){
+        return new Promise((resolve, reject) =>{
+            let tx = db.transaction("user", "readonly")
+            let store = tx.objectStore("user");
+            let getReq = store.get(user.publicKey);
+            getReq.onsuccess = event =>{
+                let data = event.target.result.ipAddress;
+                resolve(data);
+            }
+        });
+    }
     
-    // function getUserAlPortNumber(db, user){
-    //     return new Promise((resolve, reject) =>{
-    //         let tx = db.transaction("user", "readonly")
-    //         let store = tx.objectStore("user");
-    //         let getReq = store.get(user.publicKey);
-    //         getReq.onsuccess = event =>{
-    //             let data = event.target.result.AlPort;
-    //             resolve(data);
-    //         }
-    //     });
-    // }
+    function getUserAlPortNumber(db, user){
+        return new Promise((resolve, reject) =>{
+            let tx = db.transaction("user", "readonly")
+            let store = tx.objectStore("user");
+            let getReq = store.get(user.publicKey);
+            getReq.onsuccess = event =>{
+                let data = event.target.result.AlPort;
+                resolve(data);
+            }
+        });
+    }
 
 
     function getMessagessWithFriend(db, friend){
