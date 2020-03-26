@@ -3,16 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <script src="classes.js" ></script>
-<!-- <script src="rumcajsDB.js" ></script> -->
+<script src="rumcajsDB.js" ></script>
 <title>Title of the document</title>
 </head>
 
 <script>
     let kuba = new User(123, "1.2.3", 321);
+    let ania = new Friend("Ania", 456, "4.5.6");
+    (async () =>{
+        let db = await setUpDb();
+        let message = new Message(kuba, ania, "ct");
+        ania.messagesList.push(message);
+        await addNewFriend(db, ania);
+        let anka = await getFriend(db, ania.publicKey);
+        console.log(anka)
+    })();
+    
 
-    // let ania = new Friend("Ania", 456, "4.5.6");
-    // let message = new Message(kuba, ania, "ct");
-    // ania.messagesList.push(message);
     // let jan = new Friend("Jan", 789, "4.5.5");
     // let message = new Message(kuba, jan, "elo");
     // jan.messagesList.push(message);
@@ -31,10 +38,10 @@
     //             then(console.log).
     //             then(() => getFriend(friend.publicKey)).
     //             then((val) => console.log(val));
-    console.log(franek)
-    console.log(alek)
+    // console.log(franek)
+    // console.log(alek)
 
-    
+
 </script>
 
 
