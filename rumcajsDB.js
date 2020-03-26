@@ -4,11 +4,11 @@
         }
     }
 
-    let db;
     function setUpDb(){
         return new Promise((resolve, reject) => {
+            let db;
             if(db){
-                resolve();
+                resolve(db);
                 return;
             }
             let dbreq = indexedDB.open('rumcajsDb', 2);
@@ -22,7 +22,7 @@
             }
             dbreq.onsuccess = event =>{
                 db = event.target.result;
-                resolve();
+                resolve(db);
             }
             dbreq.onerror = event =>{
                 reject("error connecting to rumcajsDb" + " DB details:\n" + event);
@@ -31,7 +31,7 @@
     }
 
     //Update DB
-    function addNewFriend(friend){
+    function addNewFriend(db, friend){
         return new Promise((resolve, reject) =>{
             let tx = db.transaction("friends", 'readwrite');
             let store = tx.objectStore("friends");
@@ -42,7 +42,7 @@
             }
         });
     }
-    function addNewUser(user){
+    function addNewUser(db, user){
         return new Promise((resolve, reject) =>{
             let tx = db.transaction("user", 'readwrite');
             let store = tx.objectStore("user");
@@ -53,7 +53,7 @@
             }
         });
     }
-    function addMessage(friend, message){
+    function addMessage(db, friend, message){
         return new Promise((resolve, reject) =>{
             let tx = db.transaction('friends', 'readwrite');
             let store = tx.objectStore('friends');
@@ -70,7 +70,7 @@
             tx.onerror = reject();
         });
     }
-    function updateNick(){
+    function updateNick(db){
         return new Promise((resolve, reject) =>{
             let tx = db.transaction('user', 'readwrite');
             let store = tx.objectStore('user');
@@ -90,7 +90,7 @@
 
 
     //Query db
-    function getUser(){
+    function getUser(db){
         return new Promise((resolve, reject) =>{
             let tx = db.transaction("user", "readonly")
             let store = tx.objectStore("user");
@@ -102,7 +102,7 @@
         });
     }
     
-    function getFriend(friendsPublicKey){
+    function getFriend(db, friendsPublicKey){
         return new Promise((resolve, reject) =>{
             let tx = db.transaction("friends", "readonly")
             let store = tx.objectStore("friends");
@@ -116,7 +116,7 @@
     }
 
     //Quering user's info
-    function getUserPublicKey(user){
+    function getUserPublicKey(db, user){
         return new Promise((resolve, reject) =>{
             let tx = db.transaction("user", "readonly")
             let store = tx.objectStore("user");
@@ -128,7 +128,7 @@
         });
     }
     
-    function getUserPrivateKey(user){
+    function getUserPrivateKey(db, user){
         return new Promise((resolve, reject) =>{
             let tx = db.transaction("user", "readonly")
             let store = tx.objectStore("user");
@@ -141,7 +141,7 @@
         });
     }
     
-    function getUserIpAddress(user){
+    function getUserIpAddress(db, user){
         return new Promise((resolve, reject) =>{
             let tx = db.transaction("user", "readonly")
             let store = tx.objectStore("user");
@@ -153,7 +153,7 @@
         });
     }
     
-    function getUserAlPortNumber(user){
+    function getUserAlPortNumber(db, user){
         return new Promise((resolve, reject) =>{
             let tx = db.transaction("user", "readonly")
             let store = tx.objectStore("user");
@@ -166,7 +166,7 @@
     }
 
 
-    function getMessagessWithFriend(friend){
+    function getMessagessWithFriend(db, friend){
         return new Promise((resolve, reject) =>{
             let tx = db.transaction("friends", "readonly")
             let store = tx.objectStore("friends");

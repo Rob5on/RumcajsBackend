@@ -17,11 +17,11 @@ test('Should create indexedbDB with friend and user', async (done) => {
         let friend = new Friend("Gosia", 456, "4.5.6");
         let message = new Message(user, friend, "ct");
         friend.messagesList.push(message);
-        await setUpDb();
-        await addNewUser(user);
-        await addNewFriend(friend);
-        dbUser = await getUser();
-        dbFriend = await getFriend(friend.publicKey);
+        let db = await setUpDb();
+        await addNewUser(db, user);
+        await addNewFriend(db, friend);
+        dbUser = await getUser(db);
+        dbFriend = await getFriend(db, friend.publicKey);
         delete dbUser.id;
         delete dbFriend.id;
         expect(dbUser).toEqual(user);
@@ -30,9 +30,9 @@ test('Should create indexedbDB with friend and user', async (done) => {
 });
 test('Should get user from db', async (done) => {
     let user = new User(123, "1.2.3", 321);
-    await setUpDb();
-    await addNewUser(user);
-    dbUser = await getUser();
+    let db = await setUpDb();
+    await addNewUser(db, user);
+    dbUser = await getUser(db);
     delete dbUser.id;
     expect(dbUser).toEqual(user);
     done();
