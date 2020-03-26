@@ -57,7 +57,8 @@
         return new Promise((resolve, reject) =>{
             let tx = db.transaction('friends', 'readwrite');
             let store = tx.objectStore('friends');
-            let getReq = store.get(friend.publicKey);
+            let index = store.index('publicKey');
+            let getReq = index.get(friend.publicKey);
             getReq.onsuccess = event =>{
                 let friend = event.target.result;
                 friend.messagesList.push(message);
@@ -185,5 +186,6 @@
         getUser,
         getFriend,
         getMessagessWithFriend,
-        updateNick
+        updateNick,
+        addMessage
     }

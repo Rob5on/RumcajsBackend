@@ -1,4 +1,5 @@
-const {setUpDb, addNewUser, addNewFriend, getUser, getFriend, getMessagessWithFriend, updateNick} = require('./rumcajsDB');
+const {setUpDb, addNewUser, addNewFriend, getUser,
+     getFriend, getMessagessWithFriend, updateNick, addMessage} = require('./rumcajsDB');
 const {User, Friend, Message} = require('./classes');
 require('fake-indexeddb/auto');
 
@@ -30,6 +31,23 @@ test('Should create indexedbDB with friend and user', async (done) => {
     expect(dbFriend).toEqual(friend);
     done();
 });
+test('Should add message to conversation with friend', async (done) => {  
+    let user = new User(123, "1.2.3", 321);
+    let friend = new Friend("Gosia", 456, "4.5.6");
+
+    await addNewUser(db, user);
+    await addNewFriend(db, friend);
+    
+    let message = new Message(user, friend, "ct");
+    friend.messagesList.push(message);
+    await addMessage(db, friend, message);
+
+    dbFriend = await getFriend(db, friend.publicKey);
+
+    expect(dbFriend.messagesList[0].message).toEqual(friend.messagesList[0].message);
+    done();
+});
+
 test('Should get user from db', async (done) => {
     let user = new User(123, "1.2.3", 321);
     await addNewUser(db, user);
@@ -58,6 +76,7 @@ test('Should get messeges with friend', async (done) => {
     expect(messegesList).toEqual(friend.messagesList);
     done();
 });
+
 test('Should update users nick', async (done) => {
     let user = new User(123, "1.2.3", 321, 111, 'adam');
     await addNewUser(db, user);
