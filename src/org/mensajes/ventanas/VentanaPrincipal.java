@@ -141,7 +141,12 @@ class marcoVentanaPrincipal extends JPanel {
 		// Send the message and set a callback for when the other user has successfully received the message
 		Cliente.enviarMensaje(Cifrado.cifrarMSG(msg), null);
 	}
+	//BE----------------------------------------------------------------------------------------------------------------
+	private void recivirMensaje(String msg) {
+		mensajes += ParseMSG.parseMensajeRecv(Cifrado.descifrarMSG(msg));
 
+		conversacion.setText(mensajes);
+	}
 
 
 	
