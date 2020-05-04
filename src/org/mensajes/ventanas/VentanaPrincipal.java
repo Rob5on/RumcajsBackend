@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.mensajes.crypto.Cifrado;
 import org.mensajes.network.GetCallback;
 import org.mensajes.parser.ParseMSG;
 import org.mensajes.ventanas.estilo.Paleta;
@@ -121,7 +122,25 @@ class marcoVentanaPrincipal extends JPanel {
 		
 	}
 	//--------------------FE-------------------------------------------------------------------------
+//BE------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// Method to send message to the other user
+	private void enviarMensaje(String msg) {
 
+		// If there is a space at the beginning, delete it
+		if (msg.charAt(0) == ' ') {
+			msg = msg.substring(1, msg.length());
+		}
+
+		// Delete the text from the input
+		entrada.setText("");
+
+		System.out.println(msg);
+		mensajes += ParseMSG.parseMensajeEnv(msg);
+		conversacion.setText(mensajes);
+
+		// Send the message and set a callback for when the other user has successfully received the message
+		Cliente.enviarMensaje(Cifrado.cifrarMSG(msg), null);
+	}
 
 
 
