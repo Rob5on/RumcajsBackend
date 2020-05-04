@@ -156,6 +156,30 @@ class MarcoConectar extends JPanel {
 			JOptionPane.showMessageDialog(null, "Only numbers can be entered in the port", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	//BE
+	// Start the client, and if the server has already started, the dialog screen opens
+	private void initClient() {
+		String IP = CIP_txt.getText();
+		String spuerto = CPort_txt.getText();
+
+		int puerto;
+
+		try {
+			puerto = Integer.parseInt(spuerto);
+			new Cliente(IP, puerto);
+			JOptionPane.showMessageDialog(null, "Client connected successfully", "Client started", JOptionPane.INFORMATION_MESSAGE);
+			CIP_txt.setEditable(false);
+			CPort_txt.setEditable(false);
+			btn_InitClient.setEnabled(false);
+			if (serverActivated) {
+				VentanaPrincipal ventana = new VentanaPrincipal();
+				ventana.mostrarVentana();
+				// CLOSE THIS WINDOW MISSING
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "You can only enter numbers in the port", "ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 	//FE
 	// Set the cryptographic key in case it hasn't been changed
 	private void setCryptoKey() {
