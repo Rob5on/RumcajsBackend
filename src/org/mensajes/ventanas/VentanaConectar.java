@@ -140,7 +140,29 @@ class MarcoConectar extends JPanel {
 	private void setCryptoKey() {
 		new Cifrado(Key_txt.getText());
 	}
+	
+	//BE
+	// Start the server, and if the client has already started, the dialog screen opens
+	private void initServer() {
+		String spuerto = SPort_txt.getText();
+		int puerto;
+		try {
+			puerto = Integer.parseInt(spuerto);
+			new Servidor(puerto);
+			JOptionPane.showMessageDialog(null, "Server started successfully, the other user can now connect", "Server started", JOptionPane.INFORMATION_MESSAGE);
+			SPort_txt.setEditable(false);
+			btn_InitServer.setEnabled(false);
+			serverActivated = true;
+			if (clientActivated) {
+				VentanaPrincipal ventana = new VentanaPrincipal();
+				ventana.mostrarVentana();
+				// CLOSE THIS WINDOW MISSING
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Only numbers can be entered in the port", "ERROR", JOptionPane.ERROR_MESSAGE);
+		}
 
+	}
 	//FE
 	// Sets the visual properties of the panel
 	private void setCryptoPropierties() {
