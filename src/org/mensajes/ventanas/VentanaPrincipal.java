@@ -7,14 +7,12 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.JEditorPane;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import org.mensajes.crypto.Cifrado;
 import org.mensajes.network.GetCallback;
+import org.mensajes.network.Servidor;
+import org.mensajes.network.Cliente;
 import org.mensajes.parser.ParseMSG;
 import org.mensajes.ventanas.estilo.Paleta;
 //----------------FE------------------------------------------------------------------
@@ -43,9 +41,12 @@ public class VentanaPrincipal extends JFrame {
 		setResizable(REDIMENSIONABLE);
 		
 		// We start the components
+
 		panel = new marcoVentanaPrincipal();
+		JScrollPane scrPane = new JScrollPane(panel);
+		add(scrPane);
 		// We added the components
-		add(panel);
+//		add(panel);
 	}
 	
 	// Show window

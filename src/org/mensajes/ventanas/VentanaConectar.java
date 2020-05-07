@@ -20,6 +20,10 @@ import javax.swing.border.TitledBorder;
 
 import org.mensajes.ventanas.estilo.Decoracion;
 import org.mensajes.ventanas.estilo.Paleta;
+import org.mensajes.network.Cliente;
+import org.mensajes.network.Servidor;
+import org.mensajes.crypto.Cifrado;
+import org.mensajes.ventanas.estilo.Paleta;
 
 public class VentanaConectar extends JFrame {
 	
