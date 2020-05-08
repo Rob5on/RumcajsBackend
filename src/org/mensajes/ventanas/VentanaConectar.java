@@ -128,7 +128,7 @@ class MarcoConectar extends JPanel {
 		btn_AddNick.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				setNickName();
+				nickName = btn_AddNick.getText();
 			}
 		});
 		
@@ -160,12 +160,10 @@ class MarcoConectar extends JPanel {
 			new Servidor(puerto);
 			JOptionPane.showMessageDialog(null, "Server started successfully, the other user can now connect", "Server started", JOptionPane.INFORMATION_MESSAGE);
 			SPort_txt.setEditable(false);
-			SPort_txt.setEnabled(false);
-			SPort_txt.setEditable(false);
 			btn_InitServer.setEnabled(false);
 			serverActivated = true;
 			if (clientActivated) {
-				VentanaPrincipal ventana = new VentanaPrincipal(nickName);
+				VentanaPrincipal ventana = new VentanaPrincipal();
 				ventana.mostrarVentana();
 				// CLOSE THIS WINDOW MISSING
 			}
@@ -183,13 +181,13 @@ class MarcoConectar extends JPanel {
 
 		try {
 			puerto = Integer.parseInt(spuerto);
-			new Cliente(IP, puerto);
+			new Cliente(IP, puerto, nickName);
 			JOptionPane.showMessageDialog(null, "Client connected successfully", "Client started", JOptionPane.INFORMATION_MESSAGE);
 			CIP_txt.setEditable(false);
 			CPort_txt.setEditable(false);
 			btn_InitClient.setEnabled(false);
 			if (serverActivated) {
-				VentanaPrincipal ventana = new VentanaPrincipal(nickName);
+				VentanaPrincipal ventana = new VentanaPrincipal();
 				ventana.mostrarVentana();
 				// CLOSE THIS WINDOW MISSING
 			}
@@ -201,15 +199,6 @@ class MarcoConectar extends JPanel {
 	// Set the cryptographic key in case it hasn't been changed
 	private void setCryptoKey() {
 		new Cifrado(Key_txt.getText());
-		Key_txt.setEditable(false);
-		Key_txt.setEnabled(false);
-		btn_crypto.setEnabled(false);
-	}
-	private void setNickName(){
-		nickName = Txt_NickName.getText();
-		Txt_NickName.setEditable(false);
-		Txt_NickName.setEnabled(false);
-		btn_AddNick.setEnabled(false);
 	}
 
 	//FE

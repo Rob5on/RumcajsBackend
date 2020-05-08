@@ -33,7 +33,7 @@ public class VentanaPrincipal extends JFrame {
 	private JPanel panel;
 	
 	// CLASS PARAMETERS window constructor
-	public VentanaPrincipal(String nickName) {
+	public VentanaPrincipal() {
 		// We configure the JFrame
 		setSize(ANCHO, ALTO);
 		setTitle(TITULO);
@@ -42,7 +42,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		// We start the components
 
-		panel = new marcoVentanaPrincipal(nickName);
+		panel = new marcoVentanaPrincipal();
 		JScrollPane scrPane = new JScrollPane(panel);
 		add(scrPane);
 		// We added the components
@@ -69,12 +69,10 @@ class marcoVentanaPrincipal extends JPanel {
 	
 	// Message stack
 	private String mensajes;
-	private String NickName;
 	
 	// Constructor of the class we initiate, configure and show
-	public marcoVentanaPrincipal(String nickName) {
+	public marcoVentanaPrincipal() {
 		super(new BorderLayout());
-		NickName = nickName;
 		
 		conversacion = new JEditorPane();
 		entrada = new JTextField();
@@ -137,7 +135,6 @@ class marcoVentanaPrincipal extends JPanel {
 		// Delete the text from the input
 		entrada.setText("");
 
-		msg = NickName + "|||||" + msg;
 		System.out.println(msg);
 		mensajes += ParseMSG.parseMensajeEnv(msg);
 		conversacion.setText(mensajes);
