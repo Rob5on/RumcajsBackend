@@ -29,7 +29,7 @@ public class VentanaConectar extends JFrame {
 	
 	// Class constants
 	private final int ANCHO = 470;
-	private final int ALTO = 500;
+	private final int ALTO = 700;
 	
 	private final String TITULO = "Chat settings";
 	
@@ -75,11 +75,12 @@ class MarcoConectar extends JPanel {
 
 	// Variables necessary to check that both things are started and go to chat
 	private boolean clientActivated, serverActivated;
+	private String nickName;
 
 	// Framework objects that must be public to access and control their properties
-	private JPanel pPrincipal, pInitserver, pInitClient, pCrypto;
-	private JButton btn_crypto, btn_InitServer, btn_InitClient;
-	private JTextField Key_txt, SPort_txt, CPort_txt, CIP_txt;
+	private JPanel pPrincipal, pInitserver, pInitClient, pCrypto, pNick;
+	private JButton btn_crypto, btn_InitServer, btn_InitClient, btn_AddNick;
+	private JTextField Key_txt, SPort_txt, CPort_txt, CIP_txt, Txt_NickName;
 
 	//FE
 	// Class constructor
@@ -90,6 +91,7 @@ class MarcoConectar extends JPanel {
 		pCrypto = new JPanel();
 		pInitserver = new JPanel();
 		pInitClient = new JPanel();
+		pNick = new JPanel();
 		
 		// Margins are added with a CardLayout
 		setLayout(new CardLayout(10,10));
@@ -104,6 +106,7 @@ class MarcoConectar extends JPanel {
 		setCryptoPropierties();
 		setInitserverVPropierties();
 		setInitClientVPropierties();
+		setNickProperties();
 		
 		/* 
 		*	Button list (To set the cryptographic key, start the server and the client),
@@ -122,6 +125,12 @@ class MarcoConectar extends JPanel {
 				initServer();
 			}
 		});
+		btn_AddNick.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				nickName = btn_AddNick.getText();
+			}
+		});
 		
 		btn_InitClient.addActionListener(new ActionListener() {
 			@Override
@@ -131,9 +140,11 @@ class MarcoConectar extends JPanel {
 		});
 		
 		// Secondary panels are added to the main one
+		pPrincipal.add(pNick);
 		pPrincipal.add(pCrypto);
 		pPrincipal.add(pInitserver);
 		pPrincipal.add(pInitClient);
+
 		
 		// The main is added to the top with the edges added
 		add(pPrincipal);
@@ -170,7 +181,7 @@ class MarcoConectar extends JPanel {
 
 		try {
 			puerto = Integer.parseInt(spuerto);
-			new Cliente(IP, puerto);
+			new Cliente(IP, puerto, nickName);
 			JOptionPane.showMessageDialog(null, "Client connected successfully", "Client started", JOptionPane.INFORMATION_MESSAGE);
 			CIP_txt.setEditable(false);
 			CPort_txt.setEditable(false);
@@ -359,6 +370,58 @@ class MarcoConectar extends JPanel {
 		c.insets = new Insets(6, 6, 6, 6);
 		pInitClient.add(btn_InitClient, c);
 		
+	}
+
+	private void setNickProperties(){
+		pNick.setForeground(Color.WHITE);
+		pNick.setBackground(Paleta.COLOR_PRIMARIO);
+		pNick.setLayout(new GridBagLayout());
+		pNick.setBorder(
+				BorderFactory.createTitledBorder(
+						BorderFactory.createLineBorder(Paleta.COLOR_SECUNDARIO),
+						"Adding nick",
+						TitledBorder.DEFAULT_JUSTIFICATION,
+						TitledBorder.DEFAULT_POSITION,
+						null,
+						Color.WHITE
+				)
+		);
+
+		GridBagConstraints c = new GridBagConstraints();
+
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.insets = new Insets(3, 3, 3, 3);
+
+		// ROW 1
+		JLabel lab_Port = new JLabel("Nick");
+		lab_Port.setForeground(Color.WHITE);
+		c.weightx = 1;
+		c.weighty = 1;
+		c.gridx = 2;
+		c.gridy = 0;
+		pNick.add(lab_Port, c);
+
+		// ROW 2
+		Txt_NickName = new JTextField();
+		Decoracion.setBasicEstiloTXT(Txt_NickName);
+		c.weightx = 1;
+		c.weighty = 1;
+		c.gridx = 0;
+		c.gridy = 1;
+		c.gridwidth = 3;
+		c.insets = new Insets(0,6,0,6);
+		pNick.add(Txt_NickName, c);
+
+		// ROW 3
+		btn_AddNick = new JButton("Add nick");
+		Decoracion.setAceptBTN(btn_AddNick);
+		c.weightx = 1;
+		c.weighty = 1;
+		c.gridx = 0;
+		c.gridy = 2;
+		c.gridwidth = 3;
+		c.insets = new Insets(6, 6, 6, 6);
+		pNick.add(btn_AddNick, c);
 	}
 	
 }

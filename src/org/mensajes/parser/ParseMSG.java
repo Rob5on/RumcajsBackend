@@ -7,7 +7,8 @@ public class ParseMSG {
 		
 		String ret;
 		
-		ret = "<p text-align:left;color:green;>"+msg+"</p>";
+		ret = "NAZAR" +
+				"<p text-align:left;color:green;>"+msg+"</p>";
 		
 		return ret;
 	}
@@ -16,7 +17,8 @@ public class ParseMSG {
 	public static String parseMensajeEnv(String msg) {
 		String ret;
 		
-		ret = "<p text-align:right;color:red;>"+msg+"</p>";
+		ret = "KUBA" +
+				"<p text-align:right;color:red;>"+msg+"</p>";
 		
 		return ret;
 	}

@@ -12,13 +12,15 @@ public class Cliente {
 
     // Class variables
     private static Socket sockCliente;
+    public String NickName;
 
     private static PrintWriter out;
     private static BufferedReader in;
 
     // Starts the client, which has the ability to send messages
-    public Cliente(String IP, int puerto) {
+    public Cliente(String IP, int puerto, String nickName) {
         try {
+            NickName = nickName;
             sockCliente = new Socket(IP, puerto);
             out = new PrintWriter(sockCliente.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(sockCliente.getInputStream()));
@@ -31,7 +33,8 @@ public class Cliente {
     // Method to send messages
     public static void enviarMensaje(String msg, SentCallback call) {
         System.out.println("enviado a "+sockCliente.getLocalAddress()+"\nmsg: "+msg);
-        out.println(msg);
+
+        out.println("message: " + msg);
         Thread get = new Thread(new Runnable() {
 
             @Override
@@ -39,14 +42,13 @@ public class Cliente {
                 String ret;
                 try {
                     ret = in.readLine();
-                    System.out.println(ret);
+                    System.out.println("message: " + ret);
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(null, "Error in verifying the reception of the message by the other user", "ERROR", JOptionPane.ERROR_MESSAGE);
                     e.printStackTrace();
                 }
             }
         });
-
         get.start();
     }
 }
