@@ -29,6 +29,8 @@ public class VentanaConectar extends JFrame {
 	private final int DEAULT_CLOP = JFrame.EXIT_ON_CLOSE;
 		
 	private final boolean REDIMENSIONABLE = false;
+	public static String ip;
+	public static String port;
 
 	//FE
 	public VentanaConectar () {
@@ -171,14 +173,14 @@ class MarcoConectar extends JPanel {
 	//BE
 	// Start the client, and if the server has already started, the dialog screen opens
 	private void initClient() {
-		String IP = CIP_txt.getText();
-		String spuerto = CPort_txt.getText();
+		VentanaConectar.ip = CIP_txt.getText();
+        VentanaConectar.port = CPort_txt.getText();
 
 		int puerto;
 
 		try {
-			puerto = Integer.parseInt(spuerto);
-			new Cliente(IP, puerto);
+			puerto = Integer.parseInt(VentanaConectar.port);
+			new Cliente(VentanaConectar.ip, puerto);
 			JOptionPane.showMessageDialog(null, "Client connected successfully", "Client started", JOptionPane.INFORMATION_MESSAGE);
 			CIP_txt.setEditable(false);
 			CPort_txt.setEditable(false);

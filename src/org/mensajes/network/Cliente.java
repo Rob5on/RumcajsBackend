@@ -12,7 +12,6 @@ public class Cliente {
 
     // Class variables
     private static Socket sockCliente;
-
     private static PrintWriter out;
     private static BufferedReader in;
 

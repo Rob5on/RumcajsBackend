@@ -13,8 +13,10 @@ public class ParseMSG {
 
 		String ret;
 		
-		ret = "<span style:text-align:left>" + nick + "</span>" +
-				"<p text-align:left;color:green;>"+message+"</p>";
+		ret = "<div style=\"text-align: left;\">" +
+				"<p style=\"color: red;\">"+nick+"</p>"+
+				"<p>"+message+"</p>"+
+				"</div>";
 		
 		return ret;
 	}
@@ -27,7 +29,7 @@ public class ParseMSG {
 		String ret;
 		
 		ret = "<div style=\"text-align: right;\">" +
-					"<p>"+nick+"</p>"+
+					"<p style=\"color: green;\">"+nick+"</p>"+
 					"<p>"+message+"</p>"+
 				"</div>";
 		

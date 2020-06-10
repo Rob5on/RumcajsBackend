@@ -65,8 +65,9 @@ class marcoVentanaPrincipal extends JPanel {
 
 	// Class variables
 	private JEditorPane conversacion;
+
 	private JTextField entrada;
-	
+
 	// Message stack
 	private String mensajes;
 	private String NickName;
@@ -85,7 +86,7 @@ class marcoVentanaPrincipal extends JPanel {
 		conversacion.setContentType("text/html");
 		conversacion.setEditable(false);
 		conversacion.setBackground(Paleta.COLOR_PRIMARIO);
-		
+
 		conversacion.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
 		conversacion.setForeground(Color.WHITE);
 		conversacion.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, Boolean.TRUE);
@@ -105,6 +106,7 @@ class marcoVentanaPrincipal extends JPanel {
 		});
 		
 		// We added the elements to the panel
+
 		add(scrPane, BorderLayout.CENTER);
 		add(entrada, BorderLayout.SOUTH);
 		
@@ -149,7 +151,16 @@ class marcoVentanaPrincipal extends JPanel {
 	private void recivirMensaje(String msg) {
 		mensajes += ParseMSG.parseMensajeRecv(Cifrado.descifrarMSG(msg));
 
-		conversacion.setText(mensajes);
+		conversacion.setText(
+//				"<table style=\"margin-left:auto; margin-right:auto\">" +
+//						"<tr>" +
+//						"    <th style=\"text-align:center;border-right: thick solid #000000\"> Connected to: "+VentanaConectar.ip +"</th>" +
+//						"    <th style=\"text-align:center;border-right: thick solid #000000\">Your nick: "+NickName +"</th>" +
+//						"    <th style=\"text-align:center;\">Listening at: "+VentanaConectar.port +"</th>" +
+//						"</tr>"+
+//						"</table>"+
+//						"<hr style=\"width:100%;text-align:left;margin-left:0\">"+
+						mensajes);
 	}
 
 
