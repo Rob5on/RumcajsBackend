@@ -43,8 +43,8 @@ public class VentanaPrincipal extends JFrame {
 		// We start the components
 
 		panel = new marcoVentanaPrincipal(nickName);
-		JScrollPane scrPane = new JScrollPane(panel);
-		add(scrPane);
+
+		add(panel);
 		// We added the components
 //		add(panel);
 	}
@@ -90,7 +90,7 @@ class marcoVentanaPrincipal extends JPanel {
 		conversacion.setForeground(Color.WHITE);
 		conversacion.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, Boolean.TRUE);
 		conversacion.setText("");
-		
+		JScrollPane scrPane = new JScrollPane(conversacion);
 		// We configure the text input
 		entrada.setBackground(Paleta.COLOR_SECUNDARIO);
 		entrada.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Paleta.COLOR_CLARO));
@@ -105,7 +105,7 @@ class marcoVentanaPrincipal extends JPanel {
 		});
 		
 		// We added the elements to the panel
-		add(conversacion, BorderLayout.CENTER);
+		add(scrPane, BorderLayout.CENTER);
 		add(entrada, BorderLayout.SOUTH);
 		
 		// We accept messages on the server

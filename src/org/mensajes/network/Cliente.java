@@ -42,7 +42,7 @@ public class Cliente {
                     ret = in.readLine();
                     System.out.println(ret);
                 } catch (IOException e) {
-                    JOptionPane.showMessageDialog(null, "Error in verifying the reception of the message by the other user", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(null, "Error in verifying the reception of the message by the other user", "ERROR", JOptionPane.ERROR_MESSAGE);
                     e.printStackTrace();
                 }
             }

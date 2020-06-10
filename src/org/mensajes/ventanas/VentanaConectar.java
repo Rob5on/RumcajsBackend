@@ -8,14 +8,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
 import org.mensajes.ventanas.estilo.Decoracion;
@@ -44,7 +37,7 @@ public class VentanaConectar extends JFrame {
 		setTitle(TITULO);
 		setDefaultCloseOperation(DEAULT_CLOP);
 		setResizable(REDIMENSIONABLE);
-		
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		// We added the frame
 		MarcoConectar marco = new MarcoConectar();
 		
@@ -150,6 +143,7 @@ class MarcoConectar extends JPanel {
 		add(pPrincipal);
 	}
 
+
 	//BE
 	// Start the server, and if the client has already started, the dialog screen opens
 	private void initServer() {
@@ -168,6 +162,7 @@ class MarcoConectar extends JPanel {
 				VentanaPrincipal ventana = new VentanaPrincipal(nickName);
 				ventana.mostrarVentana();
 				// CLOSE THIS WINDOW MISSING
+
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Only numbers can be entered in the port", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -192,6 +187,8 @@ class MarcoConectar extends JPanel {
 				VentanaPrincipal ventana = new VentanaPrincipal(nickName);
 				ventana.mostrarVentana();
 				// CLOSE THIS WINDOW MISSING
+				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+				frame.dispose();
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "You can only enter numbers in the port", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -434,5 +431,7 @@ class MarcoConectar extends JPanel {
 		c.insets = new Insets(6, 6, 6, 6);
 		pNick.add(btn_AddNick, c);
 	}
-	
+	private void close(){
+
+	}
 }
